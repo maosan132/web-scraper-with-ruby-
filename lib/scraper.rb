@@ -10,7 +10,7 @@ class Scraper
     Nokogiri::HTML(open(url))
   end
 
-  def get_jobs
+  def get_products
     base_url = ''
     main_url = "#{base_url}/"
     data = data_crawler(main_url)
