@@ -1,5 +1,5 @@
 ```
-![image](scrapper.jpg)
+![image](./scrapper.jpg)
 ```
 
 # Web-scraper-with-ruby
