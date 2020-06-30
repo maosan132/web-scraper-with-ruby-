@@ -35,20 +35,29 @@ require 'colorize'
 
 # open('http://precios.paternit.com/')
 # dom_document = _ # last return or temp_file
-results = open('http://precios.paternit.com/').read # html page saved to result
-parsed_html = Nokogiri::HTML(results) # make the html page a nokogiri object
+fetched_page = open('http://precios.paternit.com/').read # html page saved to result
+parsed_html = Nokogiri::HTML(fetched_page) # make the html page a nokogiri object
 # find name or term
-parsed_html.css('.card')
-parsed_html.css('.card').css('.card-text').first
-parsed_html.css('.card').css('.card-text').first.class.instance_methods.sort
-parsed_html.css('.card').css('.card-text').first.inner_text
-# grab prices
-parsed_html.css('.card').css('table').first.css('tbody').css('tr').css('td').class.instance_methods.sort
+product_card = parsed_html.css('.card') # all ocurrences w/ class card
+product_table = css('table.table') #
+product_title = css('.card-title') # have to follow something
+product_usage = css('.descrip') # have to follow something
 
-parsed_html.css('.card').css('table').first.css('thead').css('tr').css('th').first.text # gets type of package
-puts parsed_html.css('.card').css('table').first.css('tbody').css('tr').css('td').first.text # gets named type of package
 binding.pry
-parsed_html.css('.card').css('table').first.css('tbody').css('tr').css('td').each { |i| puts i }
-parsed_html.css('.card').css('table').first.css('tbody').css('tr').css('td').each { |i| puts i.text }
+
+product_card.css('.card-text').first
+product_card.css('.card-text').first.class.instance_methods.sort
+product_card.css('.card-text').first.inner_text
+# grab prices
+product_card.css('table').first.css('tbody').css('tr').css('td').class.instance_methods.sort
+
+product_card.css('table').first.css('thead').css('tr').css('th').first.text # gets type of package
+puts product_card.css('table').first.css('tbody').css('tr').css('td').first.text # gets named type of package
+binding.pry
+product_card.css('table').first.css('tbody').css('tr').css('td').each { |i| puts i }
+product_card.css('table').first.css('tbody').css('tr').css('td').each { |i| puts i.text }
+
+# fetch description where term was found
+# array = parsed_page.css(‘h2’).map(&:text)  # example
 
 # each {|i| puts i}
