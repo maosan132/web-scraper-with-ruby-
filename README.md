@@ -1,6 +1,6 @@
-```
+
 ![image](./scrapper.jpg)
-```
+
 
 # Web-scraper-with-ruby
 
