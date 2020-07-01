@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # !usr/local/bin/ruby
-
+require_relative '../lib/scraper.rb'
 require 'open-uri'
 require 'nokogiri'
 require 'pry'
@@ -9,55 +9,86 @@ require 'colorize'
 
 # steps
 
-# 1. Present the script "look for prices by category" that match a category.
+# 1. Present the script 'look for prices by category' that match a category.
 # 2. Give an array of strings to select what kind of category of product client want to know its prices (in the future, it could be any word user wants to search)
 # 2.1 Rspec if is showing the list
 # 3. Take (and validate) the choice and pass it to a method that initializes the crawling
 # 3.1 Rspec if the method accepts and validates the selection
-# 4. Whenever the script finds a match or matches, it would output it in an appropiate form aka "human understandable way". These are the desirable/mandatory outputs:
+# 4. Whenever the script finds a match or matches, it would output it in an appropiate form aka 'human understandable way'. These are the desirable/mandatory outputs:
 #    Title of the categ, the description of product (from where the crawler takes the category name), table of prices with different packaging sizes.
 #    In a future version, instead of showing a table with sizes, user should select what size he wants from an array of choices
 # 4.1 Rspec that script finds a match and output it
 # 5. ask user if wants to make another search
 # 5.1 If user say yes, Rspec that the method restarts the app
 
-# attepmt # 1
+title = <<~TITLE
 
-# html_data = open('http://precios.paternit.com/').read
-# parsed_html = Nokogiri::HTML(html_data)
-# price_elements = parsed_html.xpath('')
 
-# waterproofing_elements.each do |element|
-#   puts element.text
-# end
+   +-++-++-++-++-++-++-++-++-++-++-+
+   |W||e||b||-||S||c||r||a||p||e||r|
+   +-++-++-++-++-++-++-++-++-++-++-+
+  +-++-++-++-++-++-++-++-++-++-++-++-+
+  |P||a||t||e||r||n||i||t||.||c||o||m|
+  +-++-++-++-++-++-++-++-++-++-++-++-+
 
-# attempt # 2
+      by maosan132 \u00A9 2020
 
-# open('http://precios.paternit.com/')
-# dom_document = _ # last return or temp_file
-fetched_page = open('http://precios.paternit.com/').read # html page saved to result
-parsed_html = Nokogiri::HTML(fetched_page) # make the html page a nokogiri object
-# find name or term
-product_card = parsed_html.css('.card') # all ocurrences w/ class card
-product_table = css('table.table') #
-product_title = css('.card-title') # have to follow something
-product_usage = css('.descrip') # have to follow something
+TITLE
 
-binding.pry
+puts title.colorize(:color => :light_blue, :background => :black)
+puts 'Welcome to Web Scraper for Paternit.com!'.colorize(:color => :light_blue, :background => :yellow)
+puts
+puts 'This scraper retrieves the next information: title of product, description and prices'
+puts 'from the price list page of manufacturer company Paternit.'
+puts 'Select a number out of the following categories:'
+puts '(1) Adhesives | (2) Waterproofing | (3) Anchor systems | (4) Paints | (5) Cleaners | (6) Textures'
 
-product_card.css('.card-text').first
-product_card.css('.card-text').first.class.instance_methods.sort
-product_card.css('.card-text').first.inner_text
-# grab prices
-product_card.css('table').first.css('tbody').css('tr').css('td').class.instance_methods.sort
+choice = ''
 
-product_card.css('table').first.css('thead').css('tr').css('th').first.text # gets type of package
-puts product_card.css('table').first.css('tbody').css('tr').css('td').first.text # gets named type of package
-binding.pry
-product_card.css('table').first.css('tbody').css('tr').css('td').each { |i| puts i }
-product_card.css('table').first.css('tbody').css('tr').css('td').each { |i| puts i.text }
+loop do
+  choice = gets.chomp
+  break if %w[1 2 3 4 5 6 7 8 9].include?(choice)
+  puts 'Invalid choice! Please enter one of the following digits: 1 | 2 | 3 | 4 | 5 | 6'
+end
 
-# fetch description where term was found
-# array = parsed_page.css(‘h2’).map(&:text)  # example
+url = 'http://paternit.com'
+categories = ['', 'Adhesives', 'Waterproofing', 'Anchor systems', 'Paints', 'Cleaners', 'Textures']
 
-# each {|i| puts i}
+case categories
+when 1
+  
+when 
+  
+else
+  
+end
+if choice == '1'
+  url = 'https://www.udacity.com/courses/all'
+  website = UdacityScraper.new(url)
+elsif choice == 'indeed'
+  url = 'https://www.indeed.com/jobs?q=Ruby+On+Rails&l=Remote&rbl=Remote&jlid=aaa2b906602aa8f5&sort=date'
+
+  website = IndeedScraper.new(url)
+elsif choice == 'remote.io'
+  puts 'Welcome to webscraper for remote.io :)'
+  puts 'The search keywords are as followed'
+  puts '-----------------------------------------------------------------'
+  puts '0:ruby, 1: javascript,2: ruby-on-rails,3: reactjs,4: python,5: java,6: php,7: kubernetes, 8: docker,9: flask'
+  puts '-----------------------------------------------------------------'
+  puts 'Please enter number / combination from above list (eg. 124 for javascript, ruby-on-rails, and python)'
+
+  num = nil
+  loop do
+    num = gets.chomp.split('').map(&:to_i)
+    break if num.all? { |i| i <= 9 && i >= 0 }
+
+    # url = gets.chomp
+    # break if url.match?(/^(https:..www.remote.io.remote-jobs.s=)/)
+
+    puts 'Error! Please enter a valid search combination'
+  end
+
+  website = RemoteIoScraper.new(num)
+end
+
+website.scrap
