@@ -67,12 +67,22 @@ term = doc.css
 # doc.css('.card:contains("limpiador")').css('h4').text # finds the title of anything that contains "limpiador"
 # doc.css('p:contains("limpiador")').text #returns the whole contents of the p which has the term "limpiador"
 # doc.css('.card:contains("limpiador")').css('.card-title').text #returns the title of the element which contains "limpiador"
+doc.at_css('.card:contains("limpiador")').text
 # doc.css('.card:contains("limpiador")').css('.table.table').css('tr > th[1]').text #returns "tamaño" in the 1st tr > th, wherever exists the "limpiador" term
+# ary = []; doc.css('p:contains("bla")').each{|i| ary << i.text} # search all p that contains the term "bla" and populate ary with each of its contents
+# ary = []; doc.css('.card:contains("bla")').css('.card-title').each{|i| goal << i.text} # search all .card-title that contains the term "bla" and populate ary with each of its contents
+# ary = []; doc.css('p:contains("bla")').each{|i| ary << i.text} # search the text "bla" on all p and populate ary with each of its contents
+# ary = []; doc.css('p text()').each{|i| ary << i.text}          # extracts the text from all p and populate ary with each of its contents
+# ary = []; doc.css(".card-title text()").each{|i| ary << i.text} # extracts the text from all .card-title and populate ary with each of its contents (same previous)
+
+count = 0
 
 tables_data = []
 tables.each do |table|
-  cell_data = table.css('tr > td').text
-  raw_name = table.css('tr > th').text
+  count = 2
+  c = 1
+  raw_name = table.css("tr > th[#{count}]").text # gets the tr > th (headings(size- price))
+  cell_data = table.css("tr[#{c}] > td[#{count}]").text # gets the contents of th > td
   tables_data << [raw_name, cell_data]
 end
 p tables_data # [["tamanoprecio", "1500gr$25.121900gr$2.002500gr$1.500"], ["tamanoprecio", "40kg$55.12125kg$15.000"]]
