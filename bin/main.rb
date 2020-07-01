@@ -23,20 +23,19 @@ require 'colorize'
 
 title = <<~TITLE
 
+  \
+    ++-++-++-++-++-++-++-++-++-++-++-++
+     |W||e||b||-||S||c||r||a||p||e||r|
+    ++-++-++-++-++-++-++-++-++-++-++-++
+    +-++-++-++-++-++-++-++-++-+-++-++-+
+    |P||a||t||e||r||n||i||t||.|c||o||m|
+    +-++-++-++-++-++-++-++-++-+-++-++-+
 
-   +-++-++-++-++-++-++-++-++-++-++-+
-   |W||e||b||-||S||c||r||a||p||e||r|
-   +-++-++-++-++-++-++-++-++-++-++-+
-  +-++-++-++-++-++-++-++-++-++-++-++-+
-  |P||a||t||e||r||n||i||t||.||c||o||m|
-  +-++-++-++-++-++-++-++-++-++-++-++-+
-
-      by maosan132 \u00A9 2020
+          by maosan132 \u00A9 2020
 
 TITLE
-
-puts title.colorize(:color => :light_blue, :background => :black)
-puts 'Welcome to Web Scraper for Paternit.com!'.colorize(:color => :light_blue, :background => :yellow)
+puts title.colorize(color: :light_blue, background: :black)
+puts 'Welcome to Web Scraper for Paternit.com!'.colorize(color: :light_blue, background: :yellow)
 puts
 puts 'This scraper retrieves the next information: title of product, description and prices'
 puts 'from the price list page of manufacturer company Paternit.'
@@ -48,20 +47,21 @@ choice = ''
 loop do
   choice = gets.chomp
   break if %w[1 2 3 4 5 6 7 8 9].include?(choice)
+
   puts 'Invalid choice! Please enter one of the following digits: 1 | 2 | 3 | 4 | 5 | 6'
 end
 
 url = 'http://paternit.com'
 categories = ['', 'Adhesives', 'Waterproofing', 'Anchor systems', 'Paints', 'Cleaners', 'Textures']
 
-case categories
-when 1
-  
-when 
-  
-else
-  
-end
+# case categories
+# when 1
+
+# when
+
+# else
+
+# end
 if choice == '1'
   url = 'https://www.udacity.com/courses/all'
   website = UdacityScraper.new(url)
@@ -90,5 +90,3 @@ elsif choice == 'remote.io'
 
   website = RemoteIoScraper.new(num)
 end
-
-website.scrap
