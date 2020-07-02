@@ -5,14 +5,28 @@ require 'nokogiri'
 require 'pry'
 require 'colorize'
 
-class Scraper
-  def data_crawler(url)
-    Nokogiri::HTML(open(url))
+class PaternitScraper
+  # def data_crawler(url)
+  #   Nokogiri::HTML(open(url))
+  # end
+
+  # def get_products
+  #   base_url = ''
+  #   main_url = "#{base_url}/"
+  #   data = data_crawler(main_url)
+  # end
+
+  def def initialize(url = nil)
+    @url ||= "http://paternit.com" # In case of futures updates of the page it had a subdirectory sharing the same structure
+    parse(html)                    # aka: paternit.com/distribuidores --> it would have different prices
   end
 
-  def get_products
-    base_url = ''
-    main_url = "#{base_url}/"
-    data = data_crawler(main_url)
+  def html
+    @html ||= open(@url) # Uses open-uri and asigns @url to @html
   end
+
+  def parse(html)
+    @doc ||= Nokogiri::HTML(html) # Creates Nokogiri object
+  end
+
 end
