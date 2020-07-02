@@ -29,4 +29,36 @@ class PaternitScraper
     @doc ||= Nokogiri::HTML(html) # Creates Nokogiri object
   end
 
+  def matches_count
+
+  end
+
+  def products_match
+
+  end
+
+  def product_name
+
+  end
+
+  def product_usage
+
+  end
+
+  def product_prices
+
+  end
+
+  def product_price_headings
+
+  end
+
+  def product_row_count
+
+  end
+
+  def product_rows
+
+  end
+
 end
