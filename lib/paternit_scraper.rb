@@ -6,20 +6,12 @@ require 'pry'
 require 'colorize'
 
 class PaternitScraper
-  attr_reader :url, :html, :term,
-              # def data_crawler(url)
-              #   Nokogiri::HTML(open(url))
-              # end
+  attr_reader :url, :html, :term, :items, 
 
-              # def get_products
-              #   base_url = ''
-              #   main_url = "#{base_url}/"
-              #   data = data_crawler(main_url)
-              # end
-              def initialize(_url = nil)
-                @url ||= 'http://paternit.com' # In case of futures updates of the page it had a subdirectory sharing the same structure
-                parse(html)                    # aka: paternit.com/distribuidores --> it would have different prices
-              end
+  def initialize(_url = nil)
+    @url ||= 'http://precios.paternit.com' # In case of futures updates of the page it had a subdirectory sharing the same structure
+    parse(html)                    # aka: paternit.com/distribuidores --> it would have different prices
+  end
 
   def html
     @html ||= open(@url) # Uses open-uri and asigns @url to @html
@@ -32,7 +24,9 @@ class PaternitScraper
   def formatter(term)
     term.downcase
   end
-
+  def items_count
+    items_count = 
+  end
   def matches_count(term)
     term = formatter(term)
     matches = @doc.css('p:contains("#{term}")').length
