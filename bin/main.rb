@@ -50,7 +50,7 @@ loop do
   user_choice = gets.chomp
   break if %w[1 2 3 4 5 6 7 8 9].include?(user_choice)
 
-  term = case user_choice
+  terms = case user_choice
          when 1
            %w[adhesivo Adhesivo pegas Soldadura Pegante]
          when 2
@@ -70,7 +70,7 @@ loop do
 end
 
 new_scraper = Paternit_scraper.new
-new_scraper.fetcher(term)
+new_scraper.fetcher(terms)
 
 if choice == '1'
 
