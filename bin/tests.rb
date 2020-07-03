@@ -77,7 +77,7 @@ def parse_examples #no usable
 
   # assuming nokorigi object in stored in @doc: (in command line, after oneliner "nokogiri http://..." it creates the @doc)
   @doc.css('card').length #> 161 (from http://precios.paternit.com) => also onliners. nokogiri http://pre....com -e puts @doc.css('img').length
-  nokogiri http://precios.paternit.com  
+  nokogiri http://precios.paternit.com
   @doc.css(".card-title text()").map(&:text).count # returns the number of strings of each element in the html file => 162
   @doc.css('p:contains("Adhesivo")').map(&:text).count # returns the number of p that contains Adhesivo word => 5
   @doc.css('img').length #number of images in the html doc
@@ -87,9 +87,14 @@ def parse_examples #no usable
   # work with text inside p's. they need to get rid of white spaces and line jumps
   z = @doc.css('p:contains("Adhesivo")').map(&:text) # fills z array only with inner text from p that contains "Adhesivo"
   z.each {|i| i.gsub!('  ','')}                      # removes all pairs of white space
-  z.each {|i| i.gsub!('\n',' ')}                     # removes all /n and replaces with a space
-
+  z.each {|i| i.gsub!('\n',' ')}                     # removes all /n and replaces with a space, but, more easily:
+  @doc.search('//text()').map(&:text).delete_if{|x| x !~ /\w/}
   @doc.at_css('p').children.text # extracts text from p
+  @doc.text.gsub("\n", ' ').gsub("\t", ' ').split.join(' ')  #cleans text
+  > doc.at_css('h2 a').content.gsub(/\n/," ").strip
+=> "Ex-Worker at C.I.A. Says He Leaked Data on Surveillance"
+  # Working with tables
+  doc.css('tr th').each {|i| puts i.content}
   
 end
 

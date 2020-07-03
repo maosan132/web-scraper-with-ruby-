@@ -16,8 +16,9 @@ require 'colorize'
 # 3.1 Rspec if the method accepts and validates the selection
 # 4. Whenever the script finds a match or matches, it would output it in an appropiate form aka 'human understandable way'. These are the desirable/mandatory outputs:
 #    Title of the categ, the description of product (from where the crawler takes the category name), table of prices with different packaging sizes.
+#    The table rows should be colorized alternatively on even and odd rows.
 #    In a future version, instead of showing a table with sizes, user should select what size he wants from an array of choices
-# 4.1 Rspec that script finds a match and output it
+# 4.1 Rspec that script finds a match and output it like the requirements.
 # 5. ask user if wants to make another search
 # 5.1 If user say yes, Rspec that the method restarts the app
 
