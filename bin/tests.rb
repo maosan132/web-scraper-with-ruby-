@@ -89,7 +89,11 @@ def parse_examples #no usable
   z.each {|i| i.gsub!('  ','')}                      # removes all pairs of white space
   z.each {|i| i.gsub!('\n',' ')}                     # removes all /n and replaces with a space
 
+  @doc.search('//text()').map(&:text).delete_if{|x| x !~ /\w/}
   @doc.at_css('p').children.text # extracts text from p
+
+  @doc.text.gsub("\n", ' ').gsub("\t", ' ').split.join(' ')  #cleans text
+  @doc.at_css('h2 a').content.gsub(/\n/," ").strip # => "Ex-Worker at C.I.A. Says He Leaked Data on Surveillance"
   
 end
 

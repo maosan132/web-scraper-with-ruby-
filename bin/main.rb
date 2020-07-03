@@ -70,7 +70,7 @@ loop do
 end
 
 new_scraper = Paternit_scraper.new
-new_scraper.fetcher(terms)
+new_scraper.scraper(terms)
 
 if choice == '1'
 

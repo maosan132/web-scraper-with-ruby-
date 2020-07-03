@@ -6,11 +6,11 @@ require 'pry'
 require 'colorize'
 
 class PaternitScraper
-  attr_reader :doc, :url, :html, :term, :items,
+  attr_reader :doc, :url, :html, :term, :items
 
   def initialize(_url = nil)
     @url ||= 'http://precios.paternit.com' # In case of futures updates of the page it had a subdirectory sharing the same structure
-    parser(html)                    # aka: paternit.com/distribuidores --> it would have different prices
+    parser(html) # aka: paternit.com/distribuidores --> it would have different prices
   end
 
   def html
@@ -21,30 +21,40 @@ class PaternitScraper
     @doc ||= Nokogiri::HTML(html) # Creates Nokogiri object
   end
 
-  def formatter(term)
-    term.downcase
-  end
+  # maybe above methods should go in a superclass "scraper"
 
-  def products_counter
-    doc.css(".card-title").count #156
-  end
+  def scraper(terms) # takes the
+    terms.each do |term|
+      titles = doc.css("h4:contains('#{term}')").map(&:text)
+      paragraphs = doc.css("p:contains('#{term}')").map(&:text)
+      price_table = 
 
-  def count_matches(terms)
-    term = formatter(term)
-    matches = @doc.css('p:contains("#{term}")').length
-  end
-
-  def fetcher(terms)
-    terms.each do |term| 
-      @doc.css("p:contains('#{term}')").map(&:text)
     end
   end
 
-  def products_matcher(terms)
+  def is_dual_packaging?; end
+
+  def table_row_counter
+    doc.css('.card-title').count # 156 elements so far
+  end
+
+  def formatter(results)
+    results.map(&:upcase!)
+  end
+
+  def all_products_counter
+    doc.css('.card-title').count # 156 elements so far
+  end
+
+  def count_matches(_terms)
+    matches = @doc.css("p:contains('#{term}')").length
+  end
+
+  def products_matcher(_terms)
     doc.css('p:contains("Adhesivo")').map(&:text).count
   end
 
-  def product_name; end
+  def product_name(fdf); end
 
   def product_usage; end
 
