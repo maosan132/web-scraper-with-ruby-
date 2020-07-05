@@ -31,28 +31,22 @@ parsed_html = Nokogiri::HTML(open(uri)) # make the html page a nokogiri object
 # each {|i| puts i}
 #!/usr/bin/env ruby
 
-def colorize(str, color)
-    str.bold.colorize(color: :black, background: :light_blue)
-end
-
-
 puts 
 parsed_html.at('thead').search('tr').each do |row|
     puts
-    separator = '════════════'.center(12).bold.colorize(color: :light_yellow)
-    a = row.search('th[1]').text.upcase.center(12).cyan.on_blue.bold
-    b = row.search('th[2]').text.upcase.center(12).colorize(color: :black, background: :light_yellow)
+    
+    a = row.search('th[1]').text.upcase.center(12).bold
+    b = row.search('th[2]').text.upcase.center(12).bold
     puts "     #{a}|#{b}"
-    puts "     #{separator}|#{separator}"
 end
 row_counter = 0
 parsed_html.at('tbody').search('tr').each do |row|
-    c = row.search('td[1]').text.center(12)
+    c = row.search('td[1]').text.center(12).bold
     d = row.search('td[2]').text.center(12)
-    if row_counter.even?
+    if row_counter.odd?
       print "     #{c}|#{d}\n"
     else
-      puts "     #{c.colorize(color: :black, background: :light_blue)}|#{d.colorize(color: :black, background: :light_blue)}"
+      puts "     #{c.black.on_light_yellow}|#{d.black.on_light_blue}"
     end
     row_counter += 1
 end
