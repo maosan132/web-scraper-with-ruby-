@@ -101,11 +101,24 @@ def parse_examples #no usable
     print row.search('th, td[1]').map(&:text)
     print cells = row.search('th[2], td[2]').map(&:text)
   end
-
+  puts "-----------PRICE TABLE-------------"
+  print a = @doc.at('table').search('tr > th[1]').map(&:text)
+    print "   --|--   "
+  puts b = @doc.at('table').search('tr > th[2]').map(&:text)
   a = @doc.at('table').search('tr').each do |row|
-    p cells = row.search('th[1], td').map { |cell| cell.text.strip }
+      puts "-----------------------------------"
+      print c = row.search('th, td[1]').map { |cell| cell.text.ljust(15).strip } #or better yet, (&:text)
+      print d = row.search('th, td[2]').map { |cell| cell.text.ljust(15).strip }
+    end
+    
   end
-  
+  # ["Tamaños"]
+  # ["Cuñete", "$665.000"]
+  # ["Galón", "$150.000"]
+  # ["¼ Galón", "$52.500"]
+  # ["1/8", "$29.000"]
+  # ["1/16", "$17.000"]
+  # ["1/32", "$11.500"]
 end
 
 def align_example #no usable
