@@ -56,11 +56,6 @@ html = <<EOT
   </html>
 EOT
 
-doc = Nokogiri::HTML(html)
-
-# rows = tables.css('tr')
-tables = doc.css('div.table-sm > table.table') #starts earch on tables
-term = doc.css
 
 def parse_examples #no usable
   doc.css('.card:nth-child(2) h4').text #PEGANTE CERAMICO --> contents of second level bellow card class, in h4 tag
@@ -87,14 +82,29 @@ def parse_examples #no usable
   # work with text inside p's. they need to get rid of white spaces and line jumps
   z = @doc.css('p:contains("Adhesivo")').map(&:text) # fills z array only with inner text from p that contains "Adhesivo"
   z.each {|i| i.gsub!('  ','')}                      # removes all pairs of white space
-  z.each {|i| i.gsub!('\n',' ')}                     # removes all /n and replaces with a space, but, more easily:
+  z.each {|i| i.gsub!('\n',' ')}                     # removes all /n and replaces with a space
+
   @doc.search('//text()').map(&:text).delete_if{|x| x !~ /\w/}
   @doc.at_css('p').children.text # extracts text from p
+
   @doc.text.gsub("\n", ' ').gsub("\t", ' ').split.join(' ')  #cleans text
-  > doc.at_css('h2 a').content.gsub(/\n/," ").strip
-=> "Ex-Worker at C.I.A. Says He Leaked Data on Surveillance"
-  # Working with tables
-  doc.css('tr th').each {|i| puts i.content}
+  @doc.at_css('h2 a').content.gsub(/\n/," ").strip # => "Ex-Worker at C.I.A. Says He Leaked Data on Surveillance"
+  
+  titles_array = @doc.search('.container .card .card-title').map(&:text)
+  stripped_titles_array = titles_array.map {|i| i.gsub("\n", ' ').gsub("\t", ' ').split.join(' ')}
+
+  description_array = @doc.search('.container .card .card-title').map(&:text) # q = all p dirty
+  stripped_description_array = titles_array.map {|i| i.gsub("\n", ' ').gsub("\t", ' ').split.join(' ')}
+  
+  all_cells = []
+  @doc.at('table').search('tr').each do |row|
+    print row.search('th, td[1]').map(&:text)
+    print cells = row.search('th[2], td[2]').map(&:text)
+  end
+
+  a = @doc.at('table').search('tr').each do |row|
+    p cells = row.search('th[1], td').map { |cell| cell.text.strip }
+  end
   
 end
 
@@ -108,7 +118,12 @@ def align_example #no usable
   angel     24
 end
 
-count = 0
+doc = Nokogiri::HTML(html)
+
+# rows = tables.css('tr')
+tables = doc.css('div.table-sm > table.table') #start search on tables
+term = doc.css
+count = 0 
 
 tables_data = []
 tables.each do |table|

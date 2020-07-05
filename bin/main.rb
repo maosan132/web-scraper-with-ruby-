@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # !usr/local/bin/ruby
-require_relative '../lib/scraper.rb'
+require_relative '../lib/paternit_scraper.rb'
 require 'open-uri'
 require 'nokogiri'
 require 'pry'
@@ -41,30 +41,40 @@ puts
 puts 'This scraper retrieves the next information: title of product, description and prices'
 puts 'from the price list page of manufacturer company Paternit.'
 puts 'Select a number out of the following categories:'
-puts '(1) Adhesives | (2) Waterproofing | (3) Anchor systems | (4) Paints | (5) Cleaners | (6) Textures'
+puts '(1) Adhesives | (2) Waterproofing | (3) Anchor systems | (4) Paints | (5) Cleaners | (6) Sealers'
 
 choice = ''
+url = 'http://paternit.com'
+# categories = ['', 'Adhesives', 'Waterproofing', 'Anchor systems', 'Paints', 'Cleaners', 'sealers']
 
 loop do
-  choice = gets.chomp
-  break if %w[1 2 3 4 5 6 7 8 9].include?(choice)
+  user_choice = gets.chomp
+  break if %w[1 2 3 4 5 6 7 8 9].include?(user_choice)
 
+  terms = case user_choice
+         when 1
+           %w[adhesivo pegas soldadura pegante]
+         when 2
+           %w[impermeabiliza filtraciones humedad]
+         when 3
+           %w[anclajes anclaje]
+         when
+          %w[vinilo esmalte]
+         when
+          %w[limpia]
+         when
+          %w[sellante sellador]
+         else
+
+         end
   puts 'Invalid choice! Please enter one of the following digits: 1 | 2 | 3 | 4 | 5 | 6'
 end
 
-url = 'http://paternit.com'
-categories = ['', 'Adhesives', 'Waterproofing', 'Anchor systems', 'Paints', 'Cleaners', 'Textures']
+new_scraper = Paternit_scraper.new
+new_scraper.scraper(terms)
 
-# case categories
-# when 1
-
-# when
-
-# else
-
-# end
 if choice == '1'
-  url = 'https://www.udacity.com/courses/all'
+
   website = UdacityScraper.new(url)
 elsif choice == 'indeed'
   url = 'https://www.indeed.com/jobs?q=Ruby+On+Rails&l=Remote&rbl=Remote&jlid=aaa2b906602aa8f5&sort=date'
