@@ -25,17 +25,14 @@ titles_of_every_match = data.css('.card-title').map(&:text)
 paragraphs_of_every_match = data.css('p').map(&:text)
 tables_of_every_match = data.css('table')
 info = { titles: titles_of_every_match, paragraphs: paragraphs_of_every_match, tables: tables_of_every_match }
-p titles_of_every_match
-puts info[:paragraphs][1]
-puts info[:tables][1]
+puts "These are the matches: #{titles_of_every_match}"
+# puts info[:paragraphs][1]
+# puts info[:tables][1]
 
-puts '----'
-puts info[:tables][2].css('td[1]').map(&:text)
-puts '*****'
-row_counter = 0
-puts "#{matches} products matches your search:".red
+puts " #{matches} products matches your search:".red
 (0..matches - 1).each do |i|
-  puts '-' * 30
+  puts price_rows = info[:tables][i].css('tr').count - 1
+  puts '<' * 30
   puts "#{i}. #{info[:titles][i]}"
   puts '-' * 30
   puts info[:paragraphs][i]
@@ -45,11 +42,29 @@ puts "#{matches} products matches your search:".red
   a = info[:tables][i].css('th[1]').text.upcase.center(12)
   b = info[:tables][i].css('th[2]').text.upcase.center(12)
   puts "     #{a}|#{b}"
-  c = info[:tables][i].css('td[1]').map(&:text)
-  d = info[:tables][i].css('td[2]').map(&:text)
-
-  puts "     #{c}|#{d}\n"
-
-  row_counter += 1
+  c = info[:tables][i].css('td[1]').map { |i| i.text.center(12) }
+  d = info[:tables][i].css('td[2]').map { |i| i.text.center(12) }
+  (1..price_rows).each do |i|
+    puts "     #{c[i]}|#{d[i]}\n"
+  end
+  price_rows = 0
 end
 puts '-' * 30
+
+# data.at_css('tbody').css('tr').each do |row|
+#
+# puts
+# puts key
+#   a = row.css('th[1]').text.upcase.center(12)
+#   b = row.css('th[2]').text.upcase.center(12)
+#   puts "     #{a}|#{b}"
+
+# c = row.css('td[1]').text.center(12)
+# d = row.css('td[2]').text.center(12)
+# if row_counter.odd?
+#   print "     #{c}|#{d}\n"
+# else
+#   puts "     #{c.black.on_light_yellow}|#{d.black.on_light_blue}"
+# end
+# row_counter += 1
+# end
