@@ -39,13 +39,13 @@ puts " #{matches} products matches your search:".red
   puts '-' * 30
   puts 'Price List'
   puts '-' * 30
-  a = info[:tables][i].css('th[1]').text.upcase.center(12)
-  b = info[:tables][i].css('th[2]').text.upcase.center(12)
+  a = info[:tables][i].css('th[1]').text.upcase.center(12).bold
+  b = info[:tables][i].css('th[2]').text.upcase.center(12).bold
   puts "     #{a}|#{b}"
   c = info[:tables][i].css('td[1]').map { |i| i.text.center(12) }
   d = info[:tables][i].css('td[2]').map { |i| i.text.center(12) }
-  (1..price_rows).each do |i|
-    puts "     #{c[i]}|#{d[i]}\n"
+  (1..price_rows-1).each do |i|
+    puts "     #{c[i]}|#{d[i].colorize(color: :light_blue, background: :black)}\n"
   end
   price_rows = 0
 end
