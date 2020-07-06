@@ -31,10 +31,12 @@ parsed_html = Nokogiri::HTML(open(uri)) # make the html page a nokogiri object
 # each {|i| puts i}
 #!/usr/bin/env ruby
 
-puts 
+# separator = '═════════════════════════'.center(12)
+# puts "     #{separator}"
+
+puts
 parsed_html.at('thead').search('tr').each do |row|
     puts
-    
     a = row.search('th[1]').text.upcase.center(12).bold
     b = row.search('th[2]').text.upcase.center(12).bold
     puts "     #{a}|#{b}"
