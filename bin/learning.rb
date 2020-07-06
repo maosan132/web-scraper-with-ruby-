@@ -1,54 +1,55 @@
+# frozen_string_literal: true
+
 require 'open-uri'
 require 'nokogiri'
 require 'pry'
 require 'colorize'
+
 uri = 'http://precios.paternit.com/'
 parsed_html = Nokogiri::HTML(open(uri)) # make the html page a nokogiri object
-# find name or term
-#product_card = parsed_html.css('.card') # all ocurrences w/ class card
-# product_table = css('table.table') #
-# product_title = css('.card-title') # have to follow something
-# product_usage = css('.descrip') # have to follow something
-
-# binding.pry
-
-# product_card.css('.card-text').first
-# product_card.css('.card-text').first.class.instance_methods.sort
-# product_card.css('.card-text').first.inner_text
-# puts 'grab prices'.colorize(:color => :black, :background => :yellow)
-# product_card.css('table').first.css('tbody').css('tr').css('td').class.instance_methods.sort
-
-# product_card.css('table').first.css('thead').css('tr').css('th').first.text # gets type of package
-# puts product_card.css('table').first.css('tbody').css('tr').css('td').first.text # gets named type of package
-# puts "last"
-# product_card.css('table').first.css('tbody').css('tr').css('td').each { |i| puts i } # nokorigi notation
-# puts "-----"
-# product_card.css('table').first.css('tbody').css('tr').css('td').each { |i| puts i.text } # text notation
-
-# fetch description where term was found
-# array = parsed_page.css(‘h2’).map(&:text)  # example
-
-# each {|i| puts i}
-#!/usr/bin/env ruby
 
 # separator = '═════════════════════════'.center(12)
 # puts "     #{separator}"
-
+#----------------@doc.css(".card:contains('Pegante')").css('thead').css('tr').each {|i| puts i}
 puts
-parsed_html.at('thead').search('tr').each do |row|
-    puts
-    a = row.search('th[1]').text.upcase.center(12).bold
-    b = row.search('th[2]').text.upcase.center(12).bold
-    puts "     #{a}|#{b}"
-end
+
+# data = parsed_html.css(".card:contains('#{term}')")
+# tables_of_every_match = data.css('table').map(&:text)
+
+# @doc.css(".card:contains('Pegante')").css('thead').css('tr').css('th[1]').text
+
+term = 'Sellante'
+data = parsed_html.css(".card:contains('#{term}')")
+matches = data.count
+titles_of_every_match = data.css('.card-title').map(&:text)
+paragraphs_of_every_match = data.css('p').map(&:text)
+tables_of_every_match = data.css('table')
+info = { titles: titles_of_every_match, paragraphs: paragraphs_of_every_match, tables: tables_of_every_match }
+p titles_of_every_match
+puts info[:paragraphs][1]
+puts info[:tables][1]
+
+puts '----'
+puts info[:tables][2].css('td[1]').map(&:text)
+puts '*****'
 row_counter = 0
-parsed_html.at('tbody').search('tr').each do |row|
-    c = row.search('td[1]').text.center(12).bold
-    d = row.search('td[2]').text.center(12)
-    if row_counter.odd?
-      print "     #{c}|#{d}\n"
-    else
-      puts "     #{c.black.on_light_yellow}|#{d.black.on_light_blue}"
-    end
-    row_counter += 1
+puts "#{matches} products matches your search:".red
+(0..matches - 1).each do |i|
+  puts '-' * 30
+  puts "#{i}. #{info[:titles][i]}"
+  puts '-' * 30
+  puts info[:paragraphs][i]
+  puts '-' * 30
+  puts 'Price List'
+  puts '-' * 30
+  a = info[:tables][i].css('th[1]').text.upcase.center(12)
+  b = info[:tables][i].css('th[2]').text.upcase.center(12)
+  puts "     #{a}|#{b}"
+  c = info[:tables][i].css('td[1]').map(&:text)
+  d = info[:tables][i].css('td[2]').map(&:text)
+
+  puts "     #{c}|#{d}\n"
+
+  row_counter += 1
 end
+puts '-' * 30

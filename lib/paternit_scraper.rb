@@ -23,11 +23,15 @@ class PaternitScraper
 
   # maybe above methods should go in a superclass "scraper"
 
-  def scraper(terms) # takes the
-    terms.each do |term|
-      titles = doc.css("h4:contains('#{term}')").map(&:text)
-      paragraphs = doc.css("p:contains('#{term}')").map(&:text) 
+  def scraper(terms) # takes the selected term and loops x doc to create
+    parent = doc.css(".card:contains('#{term}')")
+    titles_of_every_match = parent.css(".card-title").map(&:text)
+    paragraphs_of_every_match = parent.css("p").map(&:text)
+    tables_of_every_match = parent.css("table").map(&:text)
+
     end
+    titles = doc.css("h4:contains('#{term}')").map(&:text)
+    paragraphs = doc.css("p:contains('#{term}')").map(&:text)
   end
 
   def is_dual_packaging?; end
