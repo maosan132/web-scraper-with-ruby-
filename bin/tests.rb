@@ -67,7 +67,7 @@ def parse_examples #no usable
   ary = []; doc.css('p:contains("bla")').each{|i| ary << i.text} # search all p that contains the term "bla" and populate ary with each of its contents
   ary = []; doc.css('.card:contains("bla")').css('.card-title').each{|i| goal << i.text} # search all .card-title that contains the term "bla" and populate ary with each of its contents
   ary = []; doc.css('p:contains("bla")').each{|i| ary << i.text} # search the text "bla" on all p and populate ary with each of its contents
-  ary = []; doc.css('p text()').each{|i| ary << i.text}          # extracts the text from all p and populate ary with each of its contents 
+  ary = []; doc.css('p text()').each{|i| ary << i.text}          # extracts the text from all p and populate ary with each of its contents
   ary = []; doc.css(".card-title text()").each{|i| ary << i.text} # extracts the text from all .card-title and populate ary with each of its contents (same previous)
 
   # assuming nokorigi object in stored in @doc: (in command line, after oneliner "nokogiri http://..." it creates the @doc)
@@ -110,7 +110,7 @@ def parse_examples #no usable
       print c = row.search('th, td[1]').map { |cell| cell.text.ljust(15).strip } #or better yet, (&:text)
       print d = row.search('th, td[2]').map { |cell| cell.text.ljust(15).strip }
     end
-    
+    @doc.css('.descrip text()').css('p:contains("Adhesivo")')
   end
   # ["Tamaños"]
   # ["Cuñete", "$665.000"]

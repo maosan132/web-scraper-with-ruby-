@@ -28,6 +28,7 @@ class PaternitScraper
     titles_of_every_match = parent.css(".card-title").map(&:text)
     paragraphs_of_every_match = parent.css("p").map(&:text)
     tables_of_every_match = parent.css("table").map(&:text)
+    tables_of_every_match{|i| i.gsub!("\n", ' ').gsub!("\t", ' ').split.join(' ')}
 
     end
     titles = doc.css("h4:contains('#{term}')").map(&:text)
