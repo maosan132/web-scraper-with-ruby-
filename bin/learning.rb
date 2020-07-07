@@ -7,15 +7,16 @@ require 'colorize'
 
 uri = 'http://precios.paternit.com/'
 parsed_html = Nokogiri::HTML(open(uri)) # make the html page a nokogiri object
-
-data = parsed_html.css(terms.to_s)
+terms = ".card:contains('vinilo'), .card:contains('esmalte')"
+#data = parsed_html.css(".card:contains('#{term}'), .card:contains('#{term2}'),.card:contains('#{term}'), .card:contains('#{term2}')")
+data = parsed_html.css("#{terms}")
 matches = data.count
 titles_of_every_match = data.css('.card-title').map(&:text)
 paragraphs_of_every_match = data.css('p').map(&:text)
 tables_of_every_match = data.css('table')
 info = { titles: titles_of_every_match, paragraphs: paragraphs_of_every_match, tables: tables_of_every_match }
 
-def line
+def separer
   puts '-' * 85
 end
 puts
@@ -24,11 +25,11 @@ puts "#{matches} products matches your search:  #{titles_of_every_match}"
   puts
   price_rows = info[:tables][i].css('tr').count - 1
   puts "#{i + 1}. #{info[:titles][i]}".center(4).red.bold
-  line
+  separer
   puts info[:paragraphs][i]
-  line
+  separer
   puts 'Price List'
-  line
+  separer
   a = info[:tables][i].css('th[1]').text.upcase.center(15).white.on_red.bold
   b = info[:tables][i].css('th[2]').text.upcase.center(15).white.on_red.bold
   puts "     #{a}|#{b}"

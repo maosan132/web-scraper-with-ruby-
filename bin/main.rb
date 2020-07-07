@@ -55,17 +55,17 @@ end
 
 terms = case user_choice
         when 1
-          ".card:contains('adhesivo'), .card:contains('pegas'),.card:contains('soldadura'), .card:contains('pegante')"
+          '.card:contains('adhesivo'), .card:contains('pegas'),.card:contains('soldadura'), .card:contains('pegante')'
         when 2
-          ".card:contains('impermeabiliza'), .card:contains('filtraciones'),.card:contains('humedad')"
+          '.card:contains('impermeabiliza'), .card:contains('filtraciones'),.card:contains('humedad')'
         when 3
-          ".card:contains('anclaje')"
+          '.card:contains('anclaje')'
         when 4
-          ".card:contains('vinilo'), .card:contains('esmalte')"
+          '.card:contains('vinilo'), .card:contains('esmalte')'
         when 5
-          ".card:contains('limpia')"
+          '.card:contains('limpia')'
         when 6
-          ".card:contains('sellante'), .card:contains('sellador'),.card:contains('Sellante')"
+          '.card:contains('sellante'), .card:contains('sellador'),.card:contains('Sellante')'
         when 7
           ''
   end
