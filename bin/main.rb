@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # !usr/local/bin/ruby
-require_relative '../lib/paternit_scraper.rb'
+#require_relative '../lib/paternit_scraper.rb'
 require 'open-uri'
 require 'nokogiri'
 require 'pry'
@@ -35,40 +35,42 @@ title = <<~TITLE
           by maosan132 \u00A9 2020
 
 TITLE
-puts title.colorize(color: :light_blue, background: :black)
-puts 'Welcome to Web Scraper for Paternit.com!'.colorize(color: :light_blue, background: :yellow)
+puts title.colorize(color: :yellow, background: :black)
+puts 'Welcome to Web Scraper for Paternit.com!'.colorize(color: :black, background: :yellow)
 puts
 puts 'This scraper retrieves the next information: title of product, description and prices'
 puts 'from the price list page of manufacturer company Paternit.'
 puts 'Select a number out of the following categories:'.bold
 puts '(1) Adhesives | (2) Waterproofing | (3) Anchor systems | (4) Paints | (5) Cleaners | (6) Sealers'
 
-choice = ''
+user_choice = gets.chomp.to_i
 # categories = ['', 'Adhesives', 'Waterproofing', 'Anchor systems', 'Paints', 'Cleaners', 'sealers']
-user_choice = gets.chomp
-loop do
-  break if %w[1 2 3 4 5 6 7 8 9].include?(user_choice)
-  puts 'Invalid choice! Please enter one of the following digits: 1 | 2 | 3 | 4 | 5 | 6'
-end
-
+b = %w[1 2 3 4 5 6 7 8 9].include?(user_choice)
+b
+# loop do
+#   puts  if %w[1 2 3 4 5 6 7 8 9].include?(user_choice)
+#   puts 'Invalid choice! Please enter one of the following digits: 1 | 2 | 3 | 4 | 5 | 6'
+#   user_choice = gets.chomp.to_i
+# end
 terms = case user_choice
-when 1
-  %w[adhesivo pegas soldadura pegante]
-when 2
-  %w[impermeabiliza filtraciones humedad]
-when 3
-  %w[anclaje]
-when
-%w[vinilo esmalte]
-when
-%w[limpia]
-when
-%w[sellante sellador Sellante]
-else
+  when 1
+    %w[adhesivo pegas soldadura pegante]
+  when 2
+    %w[impermeabiliza filtraciones humedad]
+  when 3
+    %w[anclaje]
+  when 4
+  %w[vinilo esmalte]
+  when 5
+  'limpia'
+  when 6
+  %w[sellante sellador Sellante]
+  else
+  b
+  end
+puts "this is #{b}"
+# binding.pry
+ puts terms
+# new_scraper = Paternit_scraper.new
+# new_scraper.scraper(terms)
 
-end
-new_scraper = Paternit_scraper.new
-new_scraper.scraper(terms)
-
-website = RemoteIoScraper.new(num)
-end
