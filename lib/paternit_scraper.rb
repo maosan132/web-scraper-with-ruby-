@@ -2,11 +2,11 @@
 
 require 'open-uri'
 require 'nokogiri'
-require 'pry'
+# require 'pry'
 require 'colorize'
 
 class PaternitScraper
-  attr_reader :url, :html, :parsed_html, :data, :info, :matches
+  attr_reader :url, :html, :parsed_html, :data, :info, :matches, :terms, :matches, :titles_of_every_match
 
   def type(i)
     puts "#{i}"
@@ -26,14 +26,16 @@ class PaternitScraper
   end
 
   def scraper(terms)
+    # data = parsed_html.css(".card:contains('vinilo'), .card:contains('esmalte')")
     data = parsed_html.css("#{terms}")
-    matches = data.count
+    @matches = data.count
     titles_of_every_match = data.css('.card-title').map(&:text)
     paragraphs_of_every_match = data.css('p').map(&:text)
     tables_of_every_match = data.css('table')
-    info = { titles: titles_of_every_match,
-             paragraphs: paragraphs_of_every_match,
-             tables: tables_of_every_match }
+    @info = { titles: titles_of_every_match,
+              paragraphs: paragraphs_of_every_match,
+              tables: tables_of_every_match }
+    display_results()
   end
 
   def separer
@@ -41,8 +43,9 @@ class PaternitScraper
   end
   # maybe above methods should go in a superclass "scraper"
 
-  def display_results(terms)
-    puts
+private
+
+  def display_results
     puts "#{matches} products matches your search:  #{titles_of_every_match}"
     (0..matches - 1).each do |i|
       puts
@@ -60,13 +63,14 @@ class PaternitScraper
       d = info[:tables][i].css('td[2]').map { |i| i.text.center(15) }
       (0..price_rows - 1).each do |i|
         puts "     #{c[i]}|#{d[i]}\n"
+        #puts "     #{c[i].underline}|#{d[i].underline}\n"
       end
       price_rows = 0
       puts
     end
   end
 end
-terms = ".card:contains('vinilo'), .card:contains('esmalte')"
-new_scraper = PaternitScraper.new
-new_scraper.type("mother_of_God")
-new_scraper.scraper(terms)
+# terms = ".card:contains('vinilo'), .card:contains('esmalte')"
+# new_scraper = PaternitScraper.new
+# new_scraper.type("mother_of_God")
+# new_scraper.scraper(terms)
