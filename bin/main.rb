@@ -37,7 +37,7 @@ title = <<~TITLE
 
 TITLE
 puts title.center(30).colorize(color: :yellow, background: :black).center(90).bold
-puts #{user_choice}
+
 puts 'This app retrieves the next information: product name, usage and prices'
 puts 'from the price list web page of manufacturer company Paternit SA.'
 puts
@@ -68,16 +68,16 @@ terms = case user_choice
           ".card:contains('limpia')"
         when 6
           ".card:contains('sellante'), .card:contains('sellador'),.card:contains('Sellante')"
-  end
+        end
 
   def loader
     print 'loading ['
     17.times do
-      sleep 0.025
+      sleep 0.02
       print '.'.light_red
-      sleep 0.025
+      sleep 0.02
       print '.'.light_yellow
-      sleep 0.025
+      sleep 0.02
       print '.'.light_blue
     end
     puts ']'
