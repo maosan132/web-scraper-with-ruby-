@@ -38,7 +38,7 @@ puts "#{matches} products matches your search:  #{titles_of_every_match}"
   line
   puts info[:paragraphs][i]
   line
-  puts 'Price List'.red
+  puts 'Price List'
   line
   a = info[:tables][i].css('th[1]').text.upcase.center(12).white.on_red.bold
   b = info[:tables][i].css('th[2]').text.upcase.center(12).white.on_red.bold
@@ -69,4 +69,12 @@ end
 #   puts "     #{c.black.on_light_yellow}|#{d.black.on_light_blue}"
 # end
 # row_counter += 1
+# end
+
+
+# def show_tr_th(col)
+#   $info[:tables][i].css("th[#{col}]").text.upcase.center(12).white.on_red.bold
+# end
+# def show_tr_td(col)
+#   $info[:tables][i].css("td[#{col}]").map { |i| i.text.center(12) }
 # end
