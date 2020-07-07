@@ -40,64 +40,35 @@ puts 'Welcome to Web Scraper for Paternit.com!'.colorize(color: :light_blue, bac
 puts
 puts 'This scraper retrieves the next information: title of product, description and prices'
 puts 'from the price list page of manufacturer company Paternit.'
-puts 'Select a number out of the following categories:'
+puts 'Select a number out of the following categories:'.bold
 puts '(1) Adhesives | (2) Waterproofing | (3) Anchor systems | (4) Paints | (5) Cleaners | (6) Sealers'
 
 choice = ''
-url = 'http://paternit.com'
 # categories = ['', 'Adhesives', 'Waterproofing', 'Anchor systems', 'Paints', 'Cleaners', 'sealers']
-
+user_choice = gets.chomp
 loop do
-  user_choice = gets.chomp
   break if %w[1 2 3 4 5 6 7 8 9].include?(user_choice)
-
-  terms = case user_choice
-         when 1
-           %w[adhesivo pegas soldadura pegante]
-         when 2
-           %w[impermeabiliza filtraciones humedad]
-         when 3
-           %w[anclajes anclaje]
-         when
-          %w[vinilo esmalte]
-         when
-          %w[limpia]
-         when
-          %w[sellante sellador]
-         else
-
-         end
   puts 'Invalid choice! Please enter one of the following digits: 1 | 2 | 3 | 4 | 5 | 6'
 end
 
+terms = case user_choice
+when 1
+  %w[adhesivo pegas soldadura pegante]
+when 2
+  %w[impermeabiliza filtraciones humedad]
+when 3
+  %w[anclaje]
+when
+%w[vinilo esmalte]
+when
+%w[limpia]
+when
+%w[sellante sellador Sellante]
+else
+
+end
 new_scraper = Paternit_scraper.new
 new_scraper.scraper(terms)
 
-if choice == '1'
-
-  website = UdacityScraper.new(url)
-elsif choice == 'indeed'
-  url = 'https://www.indeed.com/jobs?q=Ruby+On+Rails&l=Remote&rbl=Remote&jlid=aaa2b906602aa8f5&sort=date'
-
-  website = IndeedScraper.new(url)
-elsif choice == 'remote.io'
-  puts 'Welcome to webscraper for remote.io :)'
-  puts 'The search keywords are as followed'
-  puts '-----------------------------------------------------------------'
-  puts '0:ruby, 1: javascript,2: ruby-on-rails,3: reactjs,4: python,5: java,6: php,7: kubernetes, 8: docker,9: flask'
-  puts '-----------------------------------------------------------------'
-  puts 'Please enter number / combination from above list (eg. 124 for javascript, ruby-on-rails, and python)'
-
-  num = nil
-  loop do
-    num = gets.chomp.split('').map(&:to_i)
-    break if num.all? { |i| i <= 9 && i >= 0 }
-
-    # url = gets.chomp
-    # break if url.match?(/^(https:..www.remote.io.remote-jobs.s=)/)
-
-    puts 'Error! Please enter a valid search combination'
-  end
-
-  website = RemoteIoScraper.new(num)
+website = RemoteIoScraper.new(num)
 end
