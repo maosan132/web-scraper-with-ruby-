@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # !usr/local/bin/ruby
-# require_relative '../lib/paternit_scraper.rb'
+require_relative '../lib/paternit_scraper.rb'
 require 'open-uri'
 require 'nokogiri'
 require 'pry'
@@ -72,5 +72,5 @@ terms = case user_choice
 
 # binding.pry
 # puts "choice was: #{terms}"
-new_scraper = Paternit_scraper.new
+new_scraper = PaternitScraper.new
 new_scraper.scraper(terms)
