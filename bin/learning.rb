@@ -7,19 +7,10 @@ require 'colorize'
 
 uri = 'http://precios.paternit.com/'
 parsed_html = Nokogiri::HTML(open(uri)) # make the html page a nokogiri object
-
-# separator = '═════════════════════════'.center(12)
-# puts "     #{separator}"
-#----------------@doc.css(".card:contains('Pegante')").css('thead').css('tr').each {|i| puts i}
-puts
-
-# data = parsed_html.css(".card:contains('#{term}')")
-# tables_of_every_match = data.css('table').map(&:text)
-
-# @doc.css(".card:contains('Pegante')").css('thead').css('tr').css('th[1]').text
-
-term = 'Sellante'
-data = parsed_html.css(".card:contains('#{term}')")
+$parsed_html = Nokogiri::HTML(open(uri))
+d
+whole_matches
+data = parsed_html.css(".card:contains('#{term}'), .card:contains('#{term2}'),.card:contains('#{term3}'), .card:contains('#{term4}')")
 matches = data.count
 titles_of_every_match = data.css('.card-title').map(&:text)
 paragraphs_of_every_match = data.css('p').map(&:text)
@@ -34,24 +25,23 @@ puts "#{matches} products matches your search:  #{titles_of_every_match}"
 (0..matches - 1).each do |i|
   puts
   price_rows = info[:tables][i].css('tr').count - 1
-  puts "#{i+1}. #{info[:titles][i]}".center(4).red.bold
+  puts "#{i + 1}. #{info[:titles][i]}".center(4).red.bold
   line
   puts info[:paragraphs][i]
   line
   puts 'Price List'
   line
-  a = info[:tables][i].css('th[1]').text.upcase.center(12).white.on_red.bold
-  b = info[:tables][i].css('th[2]').text.upcase.center(12).white.on_red.bold
+  a = info[:tables][i].css('th[1]').text.upcase.center(15).white.on_red.bold
+  b = info[:tables][i].css('th[2]').text.upcase.center(15).white.on_red.bold
   puts "     #{a}|#{b}"
-  c = info[:tables][i].css('td[1]').map { |i| i.text.center(12) }
-  d = info[:tables][i].css('td[2]').map { |i| i.text.center(12) }
-  (1..price_rows-1).each do |i|
-        puts "     #{c[i].underline}|#{d[i].underline}\n"
+  c = info[:tables][i].css('td[1]').map { |i| i.text.center(15) }
+  d = info[:tables][i].css('td[2]').map { |i| i.text.center(15) }
+  (0..price_rows - 1).each do |i|
+    puts "     #{c[i]}|#{d[i]}\n"
   end
   price_rows = 0
   puts
 end
-
 
 # data.at_css('tbody').css('tr').each do |row|
 #
@@ -70,7 +60,6 @@ end
 # end
 # row_counter += 1
 # end
-
 
 # def show_tr_th(col)
 #   $info[:tables][i].css("th[#{col}]").text.upcase.center(12).white.on_red.bold
