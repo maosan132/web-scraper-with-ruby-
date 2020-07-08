@@ -30,10 +30,12 @@ puts
 
 puts 'Select a number out of the following categories:'.bold
 puts
-print '(1) Adhesives | (2) Waterproofing | (3) Anchor systems | (4) Paints | (5) Cleaners | (6) Sealers ' + '?___ '.bold.yellow
+print '(1) Adhesives | (2) Waterproofing | (3) Anchor systems'
+print ' | (4) Paints | (5) Cleaners | (6) Sealers ' + '?___ '.bold.yellow
 puts
 user_choice = gets.chomp.to_i
-categories = ['', 'Adhesives', 'Waterproofing', 'Anchor systems', 'Paints', 'Cleaners', 'sealers']
+categories = ['', 'Adhesives', 'Waterproofing',
+              'Anchor systems', 'Paints', 'Cleaners', 'sealers']
 selected = categories[user_choice]
 loop do
   break if [1, 2, 3, 4, 5, 6].include?(user_choice)
@@ -42,7 +44,7 @@ loop do
   print 'Please enter one of this digits: 1 | 2 | 3 | 4 | 5 | 6'
   user_choice = gets.chomp.to_i
 end
-# rubocop:disable Metrics/LineLength, Style/StringLiterals
+# rubocop:disable Metrics/LineLength
 terms = case user_choice
         when 1
           ".card:contains('adhesivo'), .card:contains('pegas'),.card:contains('soldadura'), .card:contains('pegante')"
@@ -57,13 +59,15 @@ terms = case user_choice
         when 6
           ".card:contains('sellante'), .card:contains('sellador'),.card:contains('Sellante')"
         end
-# rubocop:enable Metrics/LineLength, Style/StringLiterals
+# rubocop:enable Metrics/LineLength
 def loader
+  puts
   print 'loading ['
-  17.times do
-    (1..3).each { sleep 0.02 ; print '.' }
+  45.times do
+    sleep 0.02
+    print '.'
   end
-    puts ']'
+  puts ']'
   sleep 1
 end
 print "Your choice was: #{user_choice},"

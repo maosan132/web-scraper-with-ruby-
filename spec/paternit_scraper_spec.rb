@@ -3,11 +3,13 @@
 require './lib/paternit_scraper'
 require 'nokogiri'
 
+# rubocop:disable Metrics/BlockLength
 describe PaternitScraper do
   let(:parsed_page) { Nokogiri::HTML(open('http://precios.paternit.com')) }
   let(:object) { PaternitScraper.new }
   let(:keys) { ".card:contains('vinilo'), .card:contains('esmalte')" }
 
+  # rubocop:enable Metrics/BlockLength
   describe '#parser' do
     it 'returns a Nokogiri document' do
       expect(object.parser(parsed_page).class).to eq(Nokogiri::HTML::Document)
@@ -28,7 +30,7 @@ describe PaternitScraper do
       object.scraper(keys)
     end
   end
-  describe PaternitScraper do
+
   describe '#gather_results' do
     it "store data from #parser info hash, into 'titles' array" do
       object.scraper(keys)

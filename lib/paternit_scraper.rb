@@ -10,13 +10,17 @@ class PaternitScraper
     parser(html)
   end
 
+  # rubocop:disable Security/Open
   def html
     @html ||= open(@url)
   end
+  # rubocop:enable Security/Open
 
+  # rubocop:disable Naming/MemoizedInstanceVariableName
   def parser(html)
     @parsed_html ||= Nokogiri::HTML(html)
   end
+  # rubocop:enable Naming/MemoizedInstanceVariableName
 
   def scraper(terms)
     @data = parsed_html.css(terms.to_s)
@@ -42,6 +46,9 @@ class PaternitScraper
     display_results
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Lint/ShadowingOuterLocalVariable
+
   def display_results
     puts "#{matches} products matches your search:  #{titles_of_every_match}"
     (0..matches - 1).each do |item|
@@ -62,6 +69,8 @@ class PaternitScraper
       end
     end
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Lint/ShadowingOuterLocalVariable
 end
 
 # new_scraper = PaternitScraper.new
