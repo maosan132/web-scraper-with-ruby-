@@ -10,8 +10,6 @@ class PaternitScraper
   def initialize
     @url ||= 'http://precios.paternit.com'
     parser(html)
-    @data = Nokogiri::XML::NodeSet
-    @matches = 0
   end
 
   def html
@@ -38,7 +36,7 @@ class PaternitScraper
 
 # binding.pry
 
-  def separer
+  def adds_line
     puts '-' * 85
   end
 
@@ -50,9 +48,9 @@ private
       puts
       price_rows = info[:tables][i].css('td').count / 2
       puts "#{i + 1}. #{info[:titles][i]}".center(4).yellow.bold
-      separer
+      adds_line
       puts info[:paragraphs][i]
-      separer
+      adds_line
       puts 'Price List:'.center(40)
       a = info[:tables][i].css('th[1]').text.upcase.center(15).black.on_yellow.bold
       b = info[:tables][i].css('th[2]').text.upcase.center(15).black.on_yellow.bold
@@ -71,4 +69,4 @@ end
 # terms = ".card:contains('vinilo'), .card:contains('esmalte')"
 # new_scraper.scraper(terms)
 # puts "---"
-# puts new_scraper.data
+# puts new_scraper.matches

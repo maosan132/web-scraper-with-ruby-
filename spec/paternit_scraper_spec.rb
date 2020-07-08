@@ -1,4 +1,5 @@
 require './lib/paternit_scraper'
+require 'nokogiri'
 
 describe PaternitScraper do
   let(:parsed_page) {Nokogiri::HTML(open('http://precios.paternit.com'))}
@@ -11,14 +12,16 @@ describe PaternitScraper do
 
   describe 'parser' do
     it 'returns a Nokogiri document' do
-      expect(parsed_page.class).to eq(Nokogiri::HTML::Document)
+      expect(object.parser(parsed_page).class).to eq(Nokogiri::HTML::Document)
     end
   end
 
-  describe '#scraper' do
-    it 'grabs data from fetched web page' do
-      expect(object.scraper(keys).data).to eq(scrapped_object(terms))
+  describe '#scraper'
+    it 'grabs data user requested from fetched page' do
+      data = object.scraper(keys)
+      expect(data.class).to be_kind_of(Array)
     end
   end
+  
 end
 
