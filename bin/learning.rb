@@ -8,8 +8,8 @@ require 'colorize'
 uri = 'http://precios.paternit.com/'
 parsed_html = Nokogiri::HTML(open(uri)) # make the html page a nokogiri object
 terms = ".card:contains('vinilo'), .card:contains('esmalte')"
-#data = parsed_html.css(".card:contains('#{term}'), .card:contains('#{term2}'),.card:contains('#{term}'), .card:contains('#{term2}')")
-data = parsed_html.css("#{terms}")
+# data = parsed_html.css(".card:contains('#{term}'), .card:contains('#{term2}'),.card:contains('#{term}'), .card:contains('#{term2}')")
+data = parsed_html.css(terms.to_s)
 matches = data.count
 titles_of_every_match = data.css('.card-title').map(&:text)
 paragraphs_of_every_match = data.css('p').map(&:text)

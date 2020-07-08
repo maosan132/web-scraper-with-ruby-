@@ -3,13 +3,12 @@
 require 'open-uri'
 require 'nokogiri'
 require 'colorize'
-require 'pry'
 class PaternitScraper
   attr_reader :url, :html, :parsed_html, :data, :info, :titles_of_every_match,
               :matches, :terms, :titles, :paragraphs, :tables
 
   def initialize
-    @url ||= 'http://precios.paternit.com'
+    @url = 'http://precios.paternit.com'
     parser(html)
   end
 
@@ -63,14 +62,13 @@ class PaternitScraper
       c = tables.css('td[1]').map { |i| i.text.center(15).underline }
       d = tables.css('td[2]').map { |i| i.text.center(15).underline }
       (0..price_rows - 1).each do |i|
-          puts "     #{c[i]}|#{d[i]}\n"
+        puts "     #{c[i]}|#{d[i]}\n"
       end
-      price_rows = 0
     end
   end
 end
 
-new_scraper = PaternitScraper.new
-terms = ".card:contains('limpia')"
-new_scraper.scraper(terms)
-puts "---"
+# new_scraper = PaternitScraper.new
+# terms = ".card:contains('limpia')"
+# new_scraper.scraper(terms)
+# puts "---"
