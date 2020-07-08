@@ -22,7 +22,6 @@ class PaternitScraper
 
   def scraper(terms)
     @data = parsed_html.css("#{terms}")
-    puts data.class == Nokogiri::XML::NodeSet
     @matches = data.count
     titles_of_every_match = data.css('.card-title').map(&:text)
     paragraphs_of_every_match = data.css('p').map(&:text)
@@ -33,8 +32,6 @@ class PaternitScraper
               puts 
     display_results()
   end
-
-# binding.pry
 
   def adds_line
     puts '-' * 85

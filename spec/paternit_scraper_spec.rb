@@ -5,6 +5,7 @@ describe PaternitScraper do
   let(:parsed_page) {Nokogiri::HTML(open('http://precios.paternit.com'))}
   let(:object) {PaternitScraper.new}
   let(:keys) {(".card:contains('vinilo'), .card:contains('esmalte')")}
+  let(:all_titles) {}
 
   # let(:my_scraper_title) { Scraper.new.get_title('https://dev.to/', 'a', '.crayons-story__title') }
   # let(:my_scraper_author) { Scraper.new.get_author('https://dev.to/', '.crayons-story__title') }
@@ -16,12 +17,21 @@ describe PaternitScraper do
     end
   end
 
-  describe '#scraper'
+  describe '#scraper' do
     it 'grabs data user requested from fetched page' do
       data = object.scraper(keys)
-      expect(data.class).to be_kind_of(Array)
+      expect(data.class).to eq(Range)
+    end
+    it "populates a hash with arrays with data fetched" do
+      object.scraper(keys)
+      expect(object.info.class).to eq(Hash)
+    end
+    it "should call #display_results" do
+      expect(object).to receive(:display_results)
+      object.scraper(keys)
     end
   end
-  
+
+  describe '#display_results'
 end
 
