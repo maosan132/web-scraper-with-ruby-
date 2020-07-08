@@ -57,8 +57,8 @@ class PaternitScraper
       puts paragraphs[i]
       adds_line
       puts 'Price List:'.center(40)
-      a = tables.css('th[1]').text.upcase.center(15).black.on_yellow.bold
-      b = tables.css('th[2]').text.upcase.center(15).black.on_yellow.bold
+      a = tables[i].css('th[1]').text.upcase.center(15).black.on_yellow.bold
+      b = tables[i].css('th[2]').text.upcase.center(15).black.on_yellow.bold
       puts "     #{a}|#{b}"
       c = tables.css('td[1]').map { |i| i.text.center(15).underline }
       d = tables.css('td[2]').map { |i| i.text.center(15).underline }

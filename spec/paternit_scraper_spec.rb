@@ -7,10 +7,6 @@ describe PaternitScraper do
   let(:keys) {(".card:contains('vinilo'), .card:contains('esmalte')")}
   let(:all_titles) {}
 
-  # let(:my_scraper_title) { Scraper.new.get_title('https://dev.to/', 'a', '.crayons-story__title') }
-  # let(:my_scraper_author) { Scraper.new.get_author('https://dev.to/', '.crayons-story__title') }
-  # let(:my_scraper_urls) { Scraper.new.get_post_url('https://dev.to/', '[id^="article-link-"]') }
-
   describe 'parser' do
     it 'returns a Nokogiri document' do
       expect(object.parser(parsed_page).class).to eq(Nokogiri::HTML::Document)
@@ -26,6 +22,25 @@ describe PaternitScraper do
       object.scraper(keys)
       expect(object.info.class).to eq(Hash)
     end
+    it "should call #gather_results" do
+      expect(object).to receive(:gather_results)
+      object.scraper(keys)
+    end
+  end
+
+  describe "#gather_results" do
+    it "store data from #parser info hash, into 'titles' array" do
+      object.scraper(keys)
+      expect(object.titles.class).to eq(Array)
+    end
+    it "store data from #parser info hash, into 'paragraphs' array" do
+      object.scraper(keys)
+      expect(object.paragraphs.class).to eq(Array)
+    end
+    it "store data from #parser info hash, into 'tables' nokogiry node set" do
+      object.scraper(keys)
+      expect(object.tables.class).to eq(Nokogiri::XML::NodeSet)
+    end
     it "should call #display_results" do
       expect(object).to receive(:display_results)
       object.scraper(keys)
@@ -33,17 +48,10 @@ describe PaternitScraper do
   end
 
   describe '#display_results' do
-    # it 'prints awesome things' do
-    #   expect do
-    #     MakeIt.new.awesome('tests')
-    #   end.to output('Awesome tests').to_stdout
-    # end
+    it 'prints to screen results of operations' do
+      object.scraper(keys)
+      expect { object.display_results}.to output(String).to_stdout
+    end
 
   end
 end
-
-
-# result = object.send(:display_results)
-# expect do
-#   object.
-# end.to output('Awesome tests').to_stdout
