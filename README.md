@@ -1,137 +1,103 @@
+<br />
+<p align="center">
+  <a href="https://github.com/ioilmio/web-scraper">
+    <img src="scrapper.jpg" alt="Logo">
+  </a>
 
-![image](./scrapper.jpg)
+  <h3 align="center"> <strong>Web Scraper With Ruby</strong></h3>
 
-
-# Web-scraper-with-ruby
-
-> Scrapes precios.paternit.com and finds information that are not easily located, nor have API
-
-> Prompts user to select what kind of solution he wants and presents info and prices of products to buy
-
-> Makes the finding of categories easier than what there is right now
-
-
-
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org) 
-
-
-- Most people will glance at your `README`, *maybe* star it, and leave
-- Ergo, people should understand instantly what your project is about based on your repo
-
-> Tips
-
-- HAVE WHITE SPACE
-- MAKE IT PRETTY
-- GIFS ARE REALLY COOL
-
-> GIF Tools
-
----
-## Table of Contents 
-
-> If your `README` has a lot of info, section headers might be nice.
-
-- [Installation](#installation)
-- [Features](#features)
-- [Contributing](#contributing)
-- [Team](#team)
-- [FAQ](#faq)
-- [Support](#support)
-- [License](#license)
-
----
-
-## Installation
-
-- All the `code` required to get started
-- Images of what it should look like
-
-### Clone
-
-- Clone this repo to your local machine using `https://github.com/maosan132/web-scraper-with-ruby-`
-
-### Setup
+  <p align="center">
+    This is the Capstone Project of the Microverse Ruby curriculum!
+    <br />
+    <a href="https://github.com/maosan132/web-scraper-with-ruby-"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/maosan132/web-scraper-with-ruby-/issues">Report Bug</a>
+     <br />
+    <a href="https://github.com/maosan132/web-scraper-with-ruby-/issues">Request Feature</a>
+  </p>
+</p>
 
 
-> update and install this package first
+## Table of Contents
 
-```shell
-$ gem install nokogiri
-$ brew install fvcproductions
-```
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+  * [Usage](#usage)
+* [Author](#author)
+* [Contributing](#contributing)
+* [Acknowledgements](#acknowledgements)
 
-> now install npm and bower packages
+## About The Project
 
-```shell
-$ npm install
-$ bower install
-```
+- [ ]  Scrapes precios.paternit.com and finds information that are not easily to compile, nor have API
 
-- For all the possible languages that support syntax highlithing on GitHub (which is basically all of them), refer <a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml" target="_blank">here</a>.
+- [ ]  App prompts user to select what kind of solution he wants to know about and presents info and prices of products to buy
 
----
-
-## Features
-## Usage (Optional)
-## Documentation (Optional)
-## Tests (Optional)
-
-- Going into more detail on code and technologies used
-- I utilized this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a> for this sample `README`.
-
----
-
-## Contributing
-
-> To get started...
-
-### Step 1
-
-- **Option 1**
-    - 🍴 Fork this repo!
-
-- **Option 2**
-    - 👯 Clone this repo to your local machine using `https://github.com/joanaz/HireDot2.git`
-
-### Step 2
-
-- **HACK AWAY!** 🔨🔨🔨
-
-### Step 3
-
-- 🔃 Create a new pull request using <a href="https://github.com/joanaz/HireDot2/compare/" target="_blank">`https://github.com/joanaz/HireDot2/compare/`</a>.
-
----
-
-## FAQ
-
-- **How do I do *specifically* so and so?**
-    - No problem! Just do this.
-
----
-
-## Support
-
-Reach out to me at one of the following places!
-
-- Website at <a href="http://fvcproductions.com" target="_blank">`fvcproductions.com`</a>
-- Twitter at <a href="http://twitter.com/fvcproductions" target="_blank">`@fvcproductions`</a>
-- Insert more social links here.
-
----
-
-## Donations (Optional)
-
-- You could include a <a href="https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png" target="_blank">Gratipay</a> link as well.
-
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](https://gratipay.com/fvcproductions/)
+- [ ]  Makes the finding of categories easier than what there is right now
 
 
----
+### Built With
+This project was built using these technologies.
+* Ruby
+* Rubocop
+* VsCode
+* Open URI
+* Nokogiri Gem
+* Colorize Gem
+* Pry Gem
+* Rspec Gem
 
-## License
+### Usage
 
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+If you want to install and use the scraper you need: 
 
-- **[MIT license](http://opensource.org/licenses/mit-license.php)**
-- Copyright 2015 © <a href="http://fvcproductions.com" target="_blank">FVCproductions</a>.
+* Have Ruby installed in your computer, version 2.6.5 recommended.
+* Go to https://github.com/maosan132/web-scraper-with-ruby-
+* Click the green button
+  
+  - Clone over HTTPS
+
+* Go into your terminal and type
+
+  ```
+   $ git clone https://github.com/maosan132/web-scraper-with-ruby-.git
+  ```
+  or 
+  ```
+  $ git clone ctrl + shift + v
+  ```
+
+* Type on your terminal 'cd web-scraper-with-ruby-' and then, type 'ruby ./bin/main.rb'.
+* Choose an option among 1 to 6, which are different categories for products inside products portfolio.
+* You will be presented with all info about all products inside the selectyed category.
+
+### Automated test ###
+
+To run automated tests you can just type <pre><code>rspec</code></pre> in your terminal.
+
+## Author
+
+👤 **Mauricio Santos**
+
+- Github: [@maosan132](https://github.com/maosan132)
+- Linkedin: [@maosan132](https://www.linkedin.com/in/mauricio-santos-a7292910/)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/maosan132/web-scraper-with-ruby-/issues).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+
+## Acknowledgements
+* [Microverse](https://www.microverse.org/)
+* [The Odin Project](https://www.theodinproject.com/)
+* [Ruby Documentation](https://www.ruby-lang.org/en/documentation/)
+* [StackOverflow](https://stackoverflow.com) For the their data, and awesomeness.
+* [Text Processing wit Ruby](https://www.perlego.com/book/391383/text-processing-with-ruby-extract-value-from-the-data-that-surrounds-you-pdf)
+
