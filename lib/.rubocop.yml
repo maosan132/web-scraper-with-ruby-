@@ -3,6 +3,8 @@ AllCops:
     - "README.md"
     - "Guardfile"
     - "Rakefile"
+    - "learning.rb"
+    - "tests.rb"
 
   DisplayCopNames: true
 

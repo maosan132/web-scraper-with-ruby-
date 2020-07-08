@@ -28,7 +28,7 @@ describe PaternitScraper do
       object.scraper(keys)
     end
   end
-
+  describe PaternitScraper do
   describe '#gather_results' do
     it "store data from #parser info hash, into 'titles' array" do
       object.scraper(keys)
