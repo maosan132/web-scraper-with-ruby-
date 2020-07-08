@@ -22,7 +22,7 @@ describe PaternitScraper do
       data = object.scraper(keys)
       expect(data.class).to eq(Range)
     end
-    it "populates a hash with arrays with data fetched" do
+    it "populates a hash with data fetched" do
       object.scraper(keys)
       expect(object.info.class).to eq(Hash)
     end
@@ -32,6 +32,18 @@ describe PaternitScraper do
     end
   end
 
-  describe '#display_results'
+  describe '#display_results' do
+    # it 'prints awesome things' do
+    #   expect do
+    #     MakeIt.new.awesome('tests')
+    #   end.to output('Awesome tests').to_stdout
+    # end
+
+  end
 end
 
+
+# result = object.send(:display_results)
+# expect do
+#   object.
+# end.to output('Awesome tests').to_stdout
