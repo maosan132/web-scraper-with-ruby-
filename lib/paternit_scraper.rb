@@ -42,24 +42,6 @@ class PaternitScraper
     puts "#{item + 1}. #{titles[item]}".center(4).yellow.bold + '-' * 85
   end
 
-  def display_paragraphs
-    puts paragraphs[item] + '-' * 85
-  end
-
-  def display_table_heads
-    a = tables[item].css('th[1]').text.upcase.center(15).black.on_yellow.bold
-    b = tables[item].css('th[2]').text.upcase.center(15).black.on_yellow.bold
-    puts "     #{a}|#{b}"
-  end
-
-  def display_table_rows
-    c = tables.css('td[1]').map { |d| d.text.center(15).underline }
-    d = tables.css('td[2]').map { |k| k.text.center(15).underline }
-    (0..price_rows - 1).each do |i|
-      puts "     #{c[i]}|#{d[i]}\n"
-    end
-  end
-
   def gather_results
     @titles = info[:titles]
     @paragraphs = info[:paragraphs]
@@ -68,13 +50,18 @@ class PaternitScraper
   end
 
   def display_results
-    display_titles
     (0..matches - 1).each do |item|
-      display_titles
-      display_paragraphs
+      price_rows = tables[item].css('td').count / 2
+      puts "#{item + 1}. #{titles[item]}".center(4).yellow.bold + '-' * 85
       puts 'Price List:'.center(40)
-      display_table_heads
-      display_table_rows
+      a = tables[item].css('th[1]').text.upcase.center(15).black.on_yellow.bold
+      b = tables[item].css('th[2]').text.upcase.center(15).black.on_yellow.bold
+      puts "     #{a}|#{b}"
+      c = tables.css('td[1]').map { |d| d.text.center(15).underline }
+      d = tables.css('td[2]').map { |k| k.text.center(15).underline }
+      (0..price_rows - 1).each do |i|
+        puts "     #{c[i]}|#{d[i]}\n"
+      end
     end
   end
 end
