@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # !usr/local/bin/ruby
 
 require_relative '../lib/paternit_scraper.rb'
@@ -44,7 +42,6 @@ loop do
   print 'Please enter one of this digits: 1 | 2 | 3 | 4 | 5 | 6'
   user_choice = gets.chomp.to_i
 end
-# rubocop:disable Metrics/LineLength
 terms = case user_choice
         when 1
           ".card:contains('adhesivo'), .card:contains('pegas'),.card:contains('soldadura'), .card:contains('pegante')"
@@ -59,7 +56,6 @@ terms = case user_choice
         when 6
           ".card:contains('sellante'), .card:contains('sellador'),.card:contains('Sellante')"
         end
-# rubocop:enable Metrics/LineLength
 def loader
   puts
   print 'loading ['

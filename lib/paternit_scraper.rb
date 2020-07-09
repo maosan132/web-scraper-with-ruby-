@@ -10,11 +10,9 @@ class PaternitScraper
     parser(html)
   end
 
-  # rubocop:disable Security/Open
   def html
-    @html ||= open(@url)
+    @html ||= URI.open(@url)
   end
-  # rubocop:enable Security/Open
 
   # rubocop:disable Naming/MemoizedInstanceVariableName
   def parser(html)
@@ -35,8 +33,31 @@ class PaternitScraper
     gather_results
   end
 
-  def adds_line
-    puts '-' * 85
+  def display_matches
+    puts "#{matches} products matches your search:  #{titles_of_every_match}"
+    puts
+  end
+
+  def display_titles
+    puts "#{item + 1}. #{titles[item]}".center(4).yellow.bold + '-' * 85
+  end
+
+  def display_paragraphs
+    puts paragraphs[item] + '-' * 85
+  end
+
+  def display_table_heads
+    a = tables[item].css('th[1]').text.upcase.center(15).black.on_yellow.bold
+    b = tables[item].css('th[2]').text.upcase.center(15).black.on_yellow.bold
+    puts "     #{a}|#{b}"
+  end
+
+  def display_table_rows
+    c = tables.css('td[1]').map { |d| d.text.center(15).underline }
+    d = tables.css('td[2]').map { |k| k.text.center(15).underline }
+    (0..price_rows - 1).each do |i|
+      puts "     #{c[i]}|#{d[i]}\n"
+    end
   end
 
   def gather_results
@@ -46,29 +67,14 @@ class PaternitScraper
     display_results
   end
 
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Lint/ShadowingOuterLocalVariable
-
   def display_results
-    puts "#{matches} products matches your search:  #{titles_of_every_match}"
+    display_titles
     (0..matches - 1).each do |item|
-      puts
-      price_rows = tables[item].css('td').count / 2
-      puts "#{item + 1}. #{titles[item]}".center(4).yellow.bold
-      adds_line
-      puts paragraphs[item]
-      adds_line
+      display_titles
+      display_paragraphs
       puts 'Price List:'.center(40)
-      a = tables[item].css('th[1]').text.upcase.center(15).black.on_yellow.bold
-      b = tables[item].css('th[2]').text.upcase.center(15).black.on_yellow.bold
-      puts "     #{a}|#{b}"
-      c = tables.css('td[1]').map { |item| item.text.center(15).underline }
-      d = tables.css('td[2]').map { |item| item.text.center(15).underline }
-      (0..price_rows - 1).each do |i|
-        puts "     #{c[i]}|#{d[i]}\n"
-      end
+      display_table_heads
+      display_table_rows
     end
   end
-  # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Lint/ShadowingOuterLocalVariable
 end
