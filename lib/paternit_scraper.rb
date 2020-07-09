@@ -72,8 +72,3 @@ class PaternitScraper
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Lint/ShadowingOuterLocalVariable
 end
-
-# new_scraper = PaternitScraper.new
-# terms = ".card:contains('limpia')"
-# new_scraper.scraper(terms)
-# puts "---"
