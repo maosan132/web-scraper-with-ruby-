@@ -36,6 +36,10 @@
 
 - [ ]  Makes the finding of categories easier than what there is right now
 
+## Screenshot Gif
+
+![til](./screenshot.gif)
+
 
 ### Built With
 This project was built using these technologies.
