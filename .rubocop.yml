@@ -11,7 +11,7 @@ Layout/LineLength:
 Metrics/MethodLength:
   Max: 20
 Metrics/AbcSize:
-  Max: 50
+  Max: 65
 Metrics/ClassLength:
   Max: 150
 Metrics/BlockLength:
@@ -51,4 +51,8 @@ Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
   Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
 

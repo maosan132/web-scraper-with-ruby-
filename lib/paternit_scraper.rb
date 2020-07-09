@@ -14,11 +14,9 @@ class PaternitScraper
     @html ||= URI.open(@url)
   end
 
-  # rubocop:disable Naming/MemoizedInstanceVariableName
   def parser(html)
     @parsed_html ||= Nokogiri::HTML(html)
   end
-  # rubocop:enable Naming/MemoizedInstanceVariableName
 
   def scraper(terms)
     @data = parsed_html.css(terms.to_s)
@@ -33,15 +31,6 @@ class PaternitScraper
     gather_results
   end
 
-  def display_matches
-    puts "#{matches} products matches your search:  #{titles_of_every_match}"
-    puts
-  end
-
-  def display_titles
-    puts "#{item + 1}. #{titles[item]}".center(4).yellow.bold + '-' * 85
-  end
-
   def gather_results
     @titles = info[:titles]
     @paragraphs = info[:paragraphs]
@@ -49,10 +38,17 @@ class PaternitScraper
     display_results
   end
 
+  def display_matches
+    puts "#{matches} products matches your search:  #{titles_of_every_match}"
+  end
+
   def display_results
+    display_matches
     (0..matches - 1).each do |item|
+      puts
       price_rows = tables[item].css('td').count / 2
-      puts "#{item + 1}. #{titles[item]}".center(4).yellow.bold + '-' * 85
+      puts paragraphs[item] + "\n" + '-' * 85
+      puts "#{item + 1}. #{titles[item]}".center(4).yellow.bold + "\n" + '-' * 85
       puts 'Price List:'.center(40)
       a = tables[item].css('th[1]').text.upcase.center(15).black.on_yellow.bold
       b = tables[item].css('th[2]').text.upcase.center(15).black.on_yellow.bold
