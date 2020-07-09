@@ -47,8 +47,8 @@ class PaternitScraper
     (0..matches - 1).each do |item|
       puts
       price_rows = tables[item].css('td').count / 2
-      puts paragraphs[item] + "\n" + '-' * 85
       puts "#{item + 1}. #{titles[item]}".center(4).yellow.bold + "\n" + '-' * 85
+      puts paragraphs[item] + "\n" + '-' * 85
       puts 'Price List:'.center(40)
       a = tables[item].css('th[1]').text.upcase.center(15).black.on_yellow.bold
       b = tables[item].css('th[2]').text.upcase.center(15).black.on_yellow.bold
